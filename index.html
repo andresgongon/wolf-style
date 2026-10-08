@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wolf Style — Tus Proyectos. Tu estilo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <!-- navegacion -->
+  <header class="nav" id="nav">
+    <div class="contenedor nav-inner">
+      <a class="marca" href="index.html"><img src="img/logo-wolf.png" alt="Wolf Style" class="logo-img"></a>
+      <nav class="nav-links">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#integraciones">Integraciones</a>
+        <a href="#showcase">Espacio Wolf</a>
+        <a href="#showcase">Diseños</a>
+      </nav>
+      <div class="nav-acciones">
+        <a class="nav-signin" href="login.html">Iniciar sesión</a>
+        <a class="boton boton-nav-out" href="registro.html">Crear portafolio</a>
+      </div>
+      <button class="nav-burger" id="burger" aria-label="Menú">☰</button>
+    </div>
+  </header>
+
+  <!-- hero -->
+  <section class="hero">
+    <div class="contenedor hero-inner">
+      <h1><span class="h-blanco">Tus Proyectos.</span> <span class="h-azul">Tu estilo</span></h1>
+      <p>La plataforma de portafolios premium que te eleva por encima de los archivos individuales. Integra tu trabajo de itch.io, Sketchfab, ArtStation y YouTube en una página principal de referencia.</p>
+      <div class="hero-botones">
+        <a class="boton boton-naranja" href="registro.html">Crea tu portafolio →</a>
+        <a class="boton boton-borde" href="#showcase">Explore wolf space</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- como funciona (chronology) -->
+  <section class="seccion" id="como-funciona">
+    <div class="contenedor">
+      <div class="caja-chrono">
+        <div class="titulo-seccion">
+          <span class="etiqueta">Chronology</span>
+          <h2>Diseñado para resaltar tu imagen, no el *feed*</h2>
+          <p>La mayoría de las plataformas se centran en publicaciones individuales, sepultando al creador bajo *feeds* interminables. Wolf Style emplea diseños estructurales que ponen el foco en el artista.</p>
+        </div>
+        <div class="grid-features">
+          <article class="feature">
+            <span class="feature-num">01</span>
+            <div class="feature-icono"><img src="img/ic-identidad.svg" alt=""></div>
+            <h3>Establezca su identidad</h3>
+            <p>Reúne tu biografía, enlaces profesionales y trayectoria laboral en un atractivo diseño de encabezado personalizado.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">02</span>
+            <div class="feature-icono"><img src="img/ic-categorias.svg" alt=""></div>
+            <h3>Categorías de arquitectos</h3>
+            <p>Rompe con el formato de cronología lineal. Organiza áreas como arte 3D, sombreadores (shaders), videojuegos y sonido en columnas personalizadas.</p>
+          </article>
+          <article class="feature">
+            <span class="feature-num">03</span>
+            <div class="feature-icono"><img src="img/ic-sintetizar.svg" alt=""></div>
+            <h3>Sintetizar el material de origen</h3>
+            <p>Inserta marcos interactivos nativos desde tus fuentes activas. Los modelos 3D de Sketchfab y las capas de ArtStation se abren.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- tus ideas (seccion nueva) -->
+  <section class="seccion" id="ideas">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <h2>Tus ideas, al alcance de todos</h2>
+        <p>Cualquier persona o empresa podrá descubrir tu portafolio, conocer tu talento y acceder a tus ideas innovadoras. Haz que tus proyectos sean visibles, conecta con nuevas oportunidades y lleva tus ideas al mundo.</p>
+      </div>
+      <div class="ideas-grid">
+        <div class="ideas-img grande"><img src="img/ideas-1.jpg" alt="Proceso creativo del portafolio"></div>
+        <div class="ideas-img"><img src="img/ideas-2.jpg" alt="Proyecto 3D en Unity"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- perfil de ejemplo -->
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="perfil">
+        <div class="perfil-cabecera">
+          <div class="perfil-foto"><img src="img/avatar.jpg" alt="Hana Kurosawa"></div>
+          <div class="perfil-datos">
+            <h3>Hana Kurosawa</h3>
+            <div class="rol">Tecnólogo creativo y especialista en 3D interactivo</div>
+            <div class="lugar"><img src="img/map-pin.png" alt="" class="pin"> Tokyo, Japan</div>
+          </div>
+          <div class="perfil-stats">
+            <div><div class="num">18</div><div class="lbl">Proyectos integrados</div></div>
+            <div><div class="num">4</div><div class="lbl">Integraciones conectadas</div></div>
+            <div><div class="num">29k</div><div class="lbl">Visualizaciones</div></div>
+          </div>
+        </div>
+
+        <div class="tabs" id="tabs">
+          <button class="tab">Todos los trabajos</button>
+          <button class="tab activo">3D WebGL</button>
+          <button class="tab">Sombreadores interactivos</button>
+          <button class="tab">Acústica</button>
+          <button class="tab">Código archivado</button>
+        </div>
+
+        <div class="grid-proyectos">
+          <article class="proyecto">
+            <div class="proyecto-img"><img src="img/proj-1.jpg" alt="Activo de RV de Neo-Shibuya"></div>
+            <div class="proyecto-cuerpo"><div class="proyecto-tag-row"><span class="proyecto-tag">Incrustación de Sketchfab</span><span class="link"><img src="img/external-link.svg" alt=""></span></div><h4>Activo de RV de Neo-Shibuya</h4></div>
+          </article>
+          <article class="proyecto">
+            <div class="proyecto-img"><img src="img/proj-2.jpg" alt="Fluido líquido espacio-temporal"></div>
+            <div class="proyecto-cuerpo"><div class="proyecto-tag-row"><span class="proyecto-tag">itch.io Playable</span><span class="link"><img src="img/external-link.svg" alt=""></span></div><h4>Fluido líquido espacio-temporal</h4></div>
+          </article>
+          <article class="proyecto">
+            <div class="proyecto-img"><img src="img/proj-3.jpg" alt="Hábitat prefabricado Monolith"></div>
+            <div class="proyecto-cuerpo"><div class="proyecto-tag-row"><span class="proyecto-tag">Galería de ArtStation</span><span class="link"><img src="img/external-link.svg" alt=""></span></div><h4>Hábitat prefabricado Monolith</h4></div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- integraciones -->
+  <section class="seccion" id="integraciones">
+    <div class="contenedor">
+      <div class="grid-integra">
+        <div class="integra" style="border-color:#DDCC51"><span class="integra-ic"><img src="img/ic-generic.svg" alt=""></span><div><b>Sketchfab</b><span>Incrustaciones 3D</span></div></div>
+        <div class="integra" style="border-color:#EDE6D6"><span class="integra-ic"><img src="img/ic-generic.svg" alt=""></span><div><b>itch.io</b><span>Juegos independientes</span></div></div>
+        <div class="integra" style="border-color:#A1A1F5"><span class="integra-ic"><img src="img/ic-generic.svg" alt=""></span><div><b>ArtStation</b><span>Recursos del artistas</span></div></div>
+        <div class="integra" style="border-color:#C21943"><span class="integra-ic"><img src="img/youtube.png" alt=""></span><div><b>YouTube</b><span>Medios audiovisuales</span></div></div>
+        <div class="integra integra-github"><span class="integra-ic"><img src="img/github.svg" alt=""></span><div><b>GitHub</b><span>Código de software</span></div></div>
+        <div class="integra" style="border-color:#8CB0F4"><span class="integra-ic"><img src="img/ic-generic.svg" alt=""></span><div><b>Behance</b><span>Diseños gráficos</span></div></div>
+        <div class="integra" style="border-color:#D228E2"><span class="integra-ic"><img src="img/ic-dribbble.svg" alt=""></span><div><b>Dribbble</b><span>Recursos creativos</span></div></div>
+        <div class="integra" style="border-color:#A36B9F"><span class="integra-ic"><img src="img/ic-generic.svg" alt=""></span><div><b>Vimeo</b><span>Cinematografía</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- showcase -->
+  <section class="seccion" id="showcase">
+    <div class="contenedor">
+      <div class="titulo-seccion">
+        <span class="etiqueta">Showcase</span>
+        <h2>Creado con Wolf Style</h2>
+        <p>Descubre jerarquías reales de espacios de trabajo estructuradas por los mejores especialistas creativos globales en diversos sectores de producción.</p>
+      </div>
+      <div class="grid-creadores">
+        <article class="creador" style="border-color:#DFED95">
+          <div class="creador-img"><img src="img/show-1.jpg" alt="Clemens Visser"></div>
+          <div class="creador-cuerpo">
+            <h4>Clemens Visser</h4><div class="rol">Artista de visualización arquitectónica 3D</div>
+            <div class="creador-meta"><div><span class="k">Categoría principal</span><span class="cat">Espacios y formas</span></div><div><span class="k">Proyectos</span><span class="n">14</span></div></div>
+          </div>
+        </article>
+        <article class="creador" style="border-color:#97D96E">
+          <div class="creador-img"><img src="img/show-2.jpg" alt="Aida Thorne"></div>
+          <div class="creador-cuerpo">
+            <h4>Aida Thorne</h4><div class="rol">Cineasta y generalista de VFX</div>
+            <div class="creador-meta"><div><span class="k">Categoría principal</span><span class="cat">Cinematografía</span></div><div><span class="k">Proyectos</span><span class="n">22</span></div></div>
+          </div>
+        </article>
+        <article class="creador" style="border-color:#47B6DE">
+          <div class="creador-img"><img src="img/show-3.jpg" alt="Kenzo Ito"></div>
+          <div class="creador-cuerpo">
+            <h4>Kenzo Ito</h4><div class="rol">Desarrollador de juegos</div>
+            <div class="creador-meta"><div><span class="k">Categoría principal</span><span class="cat">Prototipos jugables</span></div><div><span class="k">Proyectos</span><span class="n">9</span></div></div>
+          </div>
+        </article>
+        <article class="creador" style="border-color:#D541B0">
+          <div class="creador-img"><img src="img/show-4.jpg" alt="Elena Rostova"></div>
+          <div class="creador-cuerpo">
+            <h4>Elena Rostova</h4><div class="rol">Ilustrador conceptual</div>
+            <div class="creador-meta"><div><span class="k">Categoría principal</span><span class="cat">Ilustraciones clave</span></div><div><span class="k">Proyectos</span><span class="n">31</span></div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- pie -->
+  <footer class="footer">
+    <div class="contenedor">
+      <div class="footer-grid">
+        <div class="footer-marca">
+          <img src="img/logo-wolf.png" alt="Wolf Style" class="footer-logo">
+          <p>El paradigma de portafolio *premium* que prioriza la identidad del creador sobre las cronologías descentralizadas. Creado en Tokio para disciplinas de diseño de élite a nivel mundial.</p>
+        </div>
+        <div class="footer-col"><h5>Plataforma</h5><a href="#">Características</a><a href="#integraciones">Integraciones</a><a href="#">Hoja de ruta</a><a href="#">Registro de cambios</a></div>
+        <div class="footer-col"><h5>Comunidad</h5><a href="#showcase">Vitrina activa</a><a href="#">Selecciones de creadores</a><a href="#">Espacio Creativo</a></div>
+        <div class="footer-col"><h5>Enterprise</h5><a href="#">Dominios personalizados</a><a href="#">Siembra de contenidos por parte de la agencia</a><a href="#">Acceso a la API del nodo</a></div>
+        <div class="footer-col"><h5>Resources</h5><a href="#">Directrices del marco</a><a href="#">Activos de marca</a><a href="#">Estado del sistema</a></div>
+      </div>
+      <div class="footer-barra">
+        <span>© 2026 Wolf Style Technologies Inc. Todos los esquemas estructurales reservados.</span>
+        <span class="footer-legal"><a href="#">política de privacidad</a><a href="#">Condiciones de uso</a><a href="#">Divulgaciones normativas</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

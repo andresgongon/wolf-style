@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subir proyecto — Wolf Style</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="contenedor nav-inner">
+      <a class="marca" href="dashboard.html"><img src="img/logo-wolf.png" alt="Wolf Style" class="logo-img"></a>
+      <div class="nav-acciones">
+        <a class="boton boton-borde" href="dashboard.html">← Volver</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="auth auth-subir">
+    <div class="auth-card ancho">
+      <h1>Subir proyecto</h1>
+      <p class="sub">Embebe tu trabajo desde una fuente externa</p>
+
+      <div class="campo"><label>Nombre del proyecto</label><input type="text" placeholder="Neo-Shibuya VR Asset"></div>
+      <div class="fila">
+        <div class="campo">
+          <label>Tipo / fuente</label>
+          <select>
+            <option>Selecciona…</option>
+            <option>Sketchfab</option><option>itch.io</option><option>ArtStation</option>
+            <option>YouTube</option><option>GitHub</option><option>Behance</option>
+            <option>Dribbble</option><option>Vimeo</option>
+          </select>
+        </div>
+        <div class="campo"><label>Año</label><input type="number" placeholder="2026"></div>
+      </div>
+      <div class="campo"><label>Enlace / embed URL</label><input type="url" placeholder="https://sketchfab.com/models/..."></div>
+      <div class="fila">
+        <div class="campo"><label>Imagen de portada (URL)</label><input type="url" placeholder="https://...jpg"></div>
+        <div class="campo"><label>Calificación (0–5)</label><input type="number" placeholder="5" min="0" max="5"></div>
+      </div>
+      <div class="campo"><label>Descripción (máx. 500)</label><textarea placeholder="Breve descripción del proyecto…"></textarea></div>
+
+      <a class="boton boton-naranja boton-full" href="dashboard.html">Publicar proyecto →</a>
+    </div>
+  </main>
+</body>
+</html>
