@@ -21,16 +21,16 @@
   <main class="dash">
     <div class="perfil-dash">
       <div class="izq">
-        <div class="avatar-dash">G</div>
+        <div class="avatar-dash" id="avatar">G</div>
         <div>
-          <h1>Germán González</h1>
-          <div class="rol">Desarrollo Web e Integración</div>
-          <div class="lugar">📍 Bogotá, Colombia</div>
+          <h1 id="nombre">…</h1>
+          <div class="rol" id="rol"></div>
+          <div class="lugar" id="lugar"></div>
         </div>
       </div>
       <div class="stats-dash">
-        <div><div class="num">12</div><div class="lbl">Proyectos</div></div>
-        <div><div class="num">4</div><div class="lbl">Integraciones</div></div>
+        <div><div class="num" id="statProyectos">0</div><div class="lbl">Proyectos</div></div>
+        <div><div class="num" id="statIntegraciones">0</div><div class="lbl">Integraciones</div></div>
         <div><div class="num">29k</div><div class="lbl">Vistas</div></div>
       </div>
     </div>
@@ -41,20 +41,52 @@
     </div>
 
     <h2>Mis proyectos</h2>
-    <div class="grid-proyectos">
-      <article class="proyecto">
-        <div class="proyecto-img relleno-a">Neo-Shibuya VR Asset<span class="link">↗</span></div>
-        <div class="proyecto-cuerpo"><span class="proyecto-tag">Sketchfab Embed</span><h4>Neo-Shibuya VR Asset</h4></div>
-      </article>
-      <article class="proyecto">
-        <div class="proyecto-img relleno-b">Spatio-Temporal Liquid Fluid<span class="link">↗</span></div>
-        <div class="proyecto-cuerpo"><span class="proyecto-tag">Itch.io Playable</span><h4>Spatio-Temporal Liquid Fluid</h4></div>
-      </article>
-      <article class="proyecto">
-        <div class="proyecto-img relleno-c">Monolith Habitat Prefab<span class="link">↗</span></div>
-        <div class="proyecto-cuerpo"><span class="proyecto-tag">ArtStation Gallery</span><h4>Monolith Habitat Prefab</h4></div>
-      </article>
-    </div>
+    <p id="estado" style="display:none;color:#9a9ab0"></p>
+    <div class="grid-proyectos" id="grid"></div>
   </main>
+
+  <script src="js/api.js"></script>
+  <script>
+    if (wolfRequireAuth()) {
+      const u = WolfAPI.getUser();
+
+      // Cerrar sesion
+      document.querySelector('.acciones-nav .boton-borde').addEventListener('click', (e) => {
+        e.preventDefault(); WolfAPI.logout(); location.href = 'index.html';
+      });
+
+      // Perfil
+      document.getElementById('nombre').textContent = u.Nombre_Completo || u.Apodo || 'Usuario';
+      document.getElementById('rol').textContent = u.Labor || 'Creativo en Wolf Style';
+      document.getElementById('lugar').textContent = '📍 ' + [u.Ciudad, u["País"]].filter(Boolean).join(', ');
+      const avatar = document.getElementById('avatar');
+      if (u.Imagen_Perfil) { avatar.style.background = "center/cover url('" + u.Imagen_Perfil + "')"; avatar.textContent = ''; }
+      else avatar.textContent = (u.Nombre_Completo || u.Apodo || '?').trim().charAt(0).toUpperCase();
+
+      const grid = document.getElementById('grid');
+      const estado = document.getElementById('estado');
+      const verEstado = t => { estado.style.display = 'block'; estado.textContent = t; };
+
+      (async () => {
+        try {
+          const data = await WolfAPI.listarRecursosDe(WolfAPI.userId());
+          const recursos = data.recursos || [];
+          document.getElementById('statProyectos').textContent = recursos.length;
+          document.getElementById('statIntegraciones').textContent = new Set(recursos.map(r => r.Tipo)).size;
+          if (!recursos.length) return verEstado('Aún no tienes proyectos. ¡Sube el primero!');
+          grid.innerHTML = recursos.map(r => {
+            const id = r.Id_Recurso || r._id;
+            const img = r.Imagen_de_Portada
+              ? '<div class="proyecto-img"><img src="' + r.Imagen_de_Portada + '" alt="' + (r.Nombre || '') + '"></div>'
+              : '<div class="proyecto-img" style="display:grid;place-items:center;color:#8a8aa0">' + (r.Nombre || '') + '</div>';
+            return '<article class="proyecto"><a href="proyecto.html?id=' + id + '" style="color:inherit;text-decoration:none">' +
+              img +
+              '<div class="proyecto-cuerpo"><div class="proyecto-tag-row"><span class="proyecto-tag">' + (r.Tipo || 'Proyecto') +
+              '</span><span class="link"><img src="img/external-link.svg" alt=""></span></div><h4>' + (r.Nombre || 'Sin título') + '</h4></div></a></article>';
+          }).join('');
+        } catch (e) { verEstado('No se pudieron cargar los proyectos: ' + e.message); }
+      })();
+    }
+  </script>
 </body>
 </html>

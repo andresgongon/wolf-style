@@ -33,9 +33,39 @@
         <input type="password" id="pass" placeholder="••••••••">
         <a class="olvide" href="#">¿Olvidaste tu contraseña?</a>
       </div>
-      <a class="boton boton-naranja boton-full" href="dashboard.html">Iniciar sesión</a>
+      <p id="msg" style="display:none;margin:0 0 14px;font-size:.9rem"></p>
+      <button type="button" id="btnLogin" class="boton boton-naranja boton-full">Iniciar sesión</button>
+      <p id="avisoDemo" class="auth-alt" style="display:none">
+        Sin servidor conectado puedes <a href="#" id="linkDemo">entrar en modo demostración</a><br>
+        <span style="opacity:.7">o usar: demo@wolfstyle.co / demo1234</span>
+      </p>
       <p class="auth-alt">¿Nuevo en Wolf Style? <a href="registro.html">Crea tu portafolio</a></p>
     </div>
   </main>
+
+  <script src="js/api.js"></script>
+  <script>
+    const msg = document.getElementById('msg');
+    const aviso = (t, color) => { msg.style.display = 'block'; msg.textContent = t; msg.style.color = color; };
+
+    document.getElementById('btnLogin').addEventListener('click', async () => {
+      const correo = document.getElementById('correo').value.trim();
+      const pass = document.getElementById('pass').value;
+      if (!correo || !pass) return aviso('Completa el correo y la contraseña.', '#ff8a8a');
+      aviso('Verificando…', '#cfcfe0');
+      try {
+        await WolfAPI.login({ Correo_Electronico: correo, Contrasena: pass });
+        location.href = 'dashboard.html';
+      } catch (e) {
+        aviso(e.message || 'No se pudo iniciar sesión.', '#ff8a8a');
+      }
+    });
+
+    // Si la API no esta arriba, ofrecer el modo demostracion para revisar offline
+    WolfAPI.probarApi().then(ok => { if (!ok) document.getElementById('avisoDemo').style.display = 'block'; });
+    document.getElementById('linkDemo').addEventListener('click', (e) => {
+      e.preventDefault(); WolfAPI.entrarDemo(); location.href = 'dashboard.html';
+    });
+  </script>
 </body>
 </html>

@@ -26,27 +26,55 @@
       <p class="sub">Únete a Wolf Style y presenta tus proyectos con estilo</p>
 
       <div class="fila">
-        <div class="campo"><label>Nombre completo</label><input type="text" placeholder="Juan Pérez"></div>
-        <div class="campo"><label>Apodo</label><input type="text" placeholder="Wolf"></div>
+        <div class="campo"><label for="nombre">Nombre completo</label><input type="text" id="nombre" placeholder="Juan Pérez"></div>
+        <div class="campo"><label for="apodo">Apodo</label><input type="text" id="apodo" placeholder="Wolf"></div>
       </div>
-      <div class="campo"><label>Correo electrónico</label><input type="email" placeholder="tucorreo@ejemplo.com"></div>
+      <div class="campo"><label for="correo">Correo electrónico</label><input type="email" id="correo" placeholder="tucorreo@ejemplo.com"></div>
       <div class="fila">
-        <div class="campo"><label>Contraseña</label><input type="password" placeholder="Mínimo 8 caracteres"></div>
-        <div class="campo"><label>Confirmar contraseña</label><input type="password" placeholder="Repite tu contraseña"></div>
-      </div>
-      <div class="fila">
-        <div class="campo"><label>País</label><input type="text" placeholder="Colombia"></div>
-        <div class="campo"><label>Departamento</label><input type="text" placeholder="Cundinamarca"></div>
+        <div class="campo"><label for="pass">Contraseña</label><input type="password" id="pass" placeholder="Mínimo 8 caracteres"></div>
+        <div class="campo"><label for="pass2">Confirmar contraseña</label><input type="password" id="pass2" placeholder="Repite tu contraseña"></div>
       </div>
       <div class="fila">
-        <div class="campo"><label>Ciudad</label><input type="text" placeholder="Bogotá"></div>
-        <div class="campo"><label>Año de nacimiento</label><input type="number" placeholder="2000"></div>
+        <div class="campo"><label for="pais">País</label><input type="text" id="pais" placeholder="Colombia"></div>
+        <div class="campo"><label for="depto">Departamento</label><input type="text" id="depto" placeholder="Cundinamarca"></div>
       </div>
-      <div class="campo"><label>Profesión / rol creativo</label><input type="text" placeholder="Ej: 3D Artist, Game Developer…"></div>
+      <div class="fila">
+        <div class="campo"><label for="ciudad">Ciudad</label><input type="text" id="ciudad" placeholder="Bogotá"></div>
+        <div class="campo"><label for="ano">Año de nacimiento</label><input type="number" id="ano" placeholder="2000"></div>
+      </div>
+      <div class="campo"><label for="labor">Profesión / rol creativo</label><input type="text" id="labor" placeholder="Ej: 3D Artist, Game Developer…"></div>
 
-      <a class="boton boton-naranja boton-full" href="dashboard.html">Crear mi portafolio →</a>
+      <p id="msg" style="display:none;margin:0 0 14px;font-size:.9rem"></p>
+      <button type="button" id="btnRegistro" class="boton boton-naranja boton-full">Crear mi portafolio →</button>
       <p class="auth-alt">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
     </div>
   </main>
+
+  <script src="js/api.js"></script>
+  <script>
+    const msg = document.getElementById('msg');
+    const aviso = (t, color) => { msg.style.display = 'block'; msg.textContent = t; msg.style.color = color; };
+    const v = id => document.getElementById(id).value.trim();
+
+    document.getElementById('btnRegistro').addEventListener('click', async () => {
+      if (!v('nombre') || !v('apodo') || !v('correo') || !v('pais') || !v('depto') || !v('ciudad') || !v('ano'))
+        return aviso('Completa todos los campos.', '#ff8a8a');
+      const pass = document.getElementById('pass').value;
+      if (pass.length < 8) return aviso('La contraseña debe tener al menos 8 caracteres.', '#ff8a8a');
+      if (pass !== document.getElementById('pass2').value) return aviso('Las contraseñas no coinciden.', '#ff8a8a');
+
+      const datos = {
+        Nombre_Completo: v('nombre'), Apodo: v('apodo'), Correo_Electronico: v('correo'),
+        Contrasena: pass, "País": v('pais'), Departamento: v('depto'), Ciudad: v('ciudad'),
+        Ano_Nacimiento: Number(v('ano')), Labor: v('labor'), Descripcion: "", Imagen_Perfil: ""
+      };
+      aviso('Creando cuenta…', '#cfcfe0');
+      try {
+        await WolfAPI.registrar(datos);
+        aviso('¡Cuenta creada! Redirigiendo a iniciar sesión…', '#8ae6a0');
+        setTimeout(() => location.href = 'login.html', 1000);
+      } catch (e) { aviso(e.message, '#ff8a8a'); }
+    });
+  </script>
 </body>
 </html>

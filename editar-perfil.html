@@ -25,16 +25,49 @@
       <p class="sub">Actualiza tu información pública</p>
 
       <div class="fila">
-        <div class="campo"><label>Nombre completo</label><input type="text" value="Germán González"></div>
-        <div class="campo"><label>Apodo</label><input type="text" value="Germán"></div>
+        <div class="campo"><label for="nombre">Nombre completo</label><input type="text" id="nombre"></div>
+        <div class="campo"><label for="apodo">Apodo</label><input type="text" id="apodo"></div>
       </div>
-      <div class="campo"><label>Profesión / rol</label><input type="text" value="Desarrollo Web e Integración"></div>
-      <div class="campo"><label>Imagen de perfil (URL)</label><input type="url" placeholder="https://...jpg"></div>
-      <div class="campo"><label>Descripción (máx. 500)</label><textarea placeholder="Cuéntanos sobre ti…"></textarea></div>
-      <div class="campo"><label>Nueva contraseña (opcional)</label><input type="password" placeholder="Déjalo vacío para no cambiarla"></div>
+      <div class="campo"><label for="labor">Profesión / rol</label><input type="text" id="labor"></div>
+      <div class="campo"><label for="imagen">Imagen de perfil (URL)</label><input type="url" id="imagen" placeholder="https://...jpg"></div>
+      <div class="campo"><label for="descripcion">Descripción (máx. 500)</label><textarea id="descripcion" maxlength="500" placeholder="Cuéntanos sobre ti…"></textarea></div>
+      <div class="campo"><label for="pass">Nueva contraseña (opcional)</label><input type="password" id="pass" placeholder="Déjalo vacío para no cambiarla"></div>
 
-      <a class="boton boton-naranja boton-full" href="dashboard.html">Guardar cambios</a>
+      <p id="msg" style="display:none;margin:0 0 14px;font-size:.9rem"></p>
+      <button type="button" id="btnGuardar" class="boton boton-naranja boton-full">Guardar cambios</button>
     </div>
   </main>
+
+  <script src="js/api.js"></script>
+  <script>
+    if (wolfRequireAuth()) {
+      const u = WolfAPI.getUser();
+      const g = id => document.getElementById(id);
+      g('nombre').value = u.Nombre_Completo || '';
+      g('apodo').value = u.Apodo || '';
+      g('labor').value = u.Labor || '';
+      g('imagen').value = u.Imagen_Perfil || '';
+      g('descripcion').value = u.Descripcion || '';
+
+      const msg = g('msg');
+      const aviso = (t, color) => { msg.style.display = 'block'; msg.textContent = t; msg.style.color = color; };
+
+      g('btnGuardar').addEventListener('click', async () => {
+        const datos = {
+          Nombre_Completo: g('nombre').value.trim(), Apodo: g('apodo').value.trim(),
+          Labor: g('labor').value.trim(), Descripcion: g('descripcion').value.trim(),
+          Imagen_Perfil: g('imagen').value.trim()
+        };
+        if (g('pass').value) datos.Contrasena = g('pass').value;
+        aviso('Guardando…', '#cfcfe0');
+        try {
+          const actualizado = await WolfAPI.actualizarUsuario(WolfAPI.userId(), datos);
+          WolfAPI.setUser({ ...u, ...actualizado });
+          aviso('¡Perfil actualizado! Redirigiendo…', '#8ae6a0');
+          setTimeout(() => location.href = 'dashboard.html', 800);
+        } catch (e) { aviso(e.message, '#ff8a8a'); }
+      });
+    }
+  </script>
 </body>
 </html>
