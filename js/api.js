@@ -11,7 +11,9 @@
 
 const WolfAPI = (() => {
 
-  const BASE_URL = "http://localhost:3000";
+  // API del equipo publicada en Render (base de datos MongoDB Atlas).
+  // Si no responde (Render dormida o sin internet) el sitio cae al modo demostración.
+  const BASE_URL = "https://wolf-style-api.onrender.com";
 
   // Sesion. La API no usa token (se descarto para esta entrega),
   // asi que guardamos el usuario que devuelve el login.
@@ -135,9 +137,22 @@ const WolfAPI = (() => {
 
     registrar: (payload) => conDemo(() => req("/usuarios", { method: "POST", body: payload }), () => Demo.registrar(payload)),
 
+    // El login de la API es: GET /inicio?Correo_Electronico=..&Contrasena=.. -> { "True": true/false }.
+    // Solo valida, no devuelve el usuario, así que si da true lo busco por correo en /usuarios.
     login: async ({ Correo_Electronico, Contrasena }) => {
       const u = await conDemo(
-        async () => { const d = await req("/usuarios/login", { method: "POST", body: { Correo_Electronico, Contrasena } }); return d.usuario || d; },
+        async () => {
+          const q = "/inicio?Correo_Electronico=" + encodeURIComponent(Correo_Electronico) + "&Contrasena=" + encodeURIComponent(Contrasena);
+          const r = await req(q);
+          const ok = r === true || r.True === true || r.true === true;
+          if (!ok) throw new Error("Correo o contraseña incorrectos.");
+          const data = await req("/usuarios");
+          const lista = data.usuarios || data || [];
+          const user = lista.find(x => (x.Correo_Electronico || "").toLowerCase() === Correo_Electronico.toLowerCase());
+          if (!user) throw new Error("No se encontró el usuario.");
+          const { Contrasena: _omit, ...sinPass } = user;
+          return sinPass;
+        },
         () => Demo.login({ Correo_Electronico, Contrasena })
       );
       setUser(u); return u;
