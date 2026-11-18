@@ -21,7 +21,7 @@
         <a href="#showcase">Espacio Wolf</a>
         <a href="#showcase">Diseños</a>
       </nav>
-      <div class="nav-acciones">
+      <div class="nav-acciones" id="navAcciones">
         <a class="nav-signin" href="login.html">Iniciar sesión</a>
         <a class="boton boton-nav-out" href="registro.html">Crear portafolio</a>
       </div>
@@ -209,6 +209,21 @@
     </div>
   </footer>
 
+  <script src="js/api.js"></script>
+  <script>
+    // Si hay una sesión abierta, el menú del inicio muestra accesos directos a
+    // "Mi portafolio" y "Editar perfil", para no tener que iniciar sesión de nuevo.
+    (function () {
+      try {
+        if (typeof WolfAPI !== 'undefined' && WolfAPI.estaLogueado()) {
+          var acc = document.getElementById('navAcciones');
+          if (acc) acc.innerHTML =
+            '<a class="nav-signin" href="editar-perfil.html">Editar perfil</a>' +
+            '<a class="boton boton-nav-out" href="dashboard.html">Mi portafolio</a>';
+        }
+      } catch (e) {}
+    })();
+  </script>
   <script src="js/main.js"></script>
 </body>
 </html>
