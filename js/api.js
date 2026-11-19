@@ -174,3 +174,19 @@ function wolfRequireAuth() {
   if (!WolfAPI.estaLogueado()) { location.href = "login.html"; return false; }
   return true;
 }
+
+// Si la portada de un proyecto no carga (URL rota, vencida o protegida contra
+// enlazado), se reemplaza por un recuadro limpio con el nombre del proyecto,
+// en vez de dejar la imagen rota. El nombre se toma del atributo alt.
+function wolfImgFallback(img) {
+  try {
+    var cont = img.parentNode;
+    if (!cont) return;
+    cont.textContent = img.getAttribute("alt") || "";
+    cont.style.display = "grid";
+    cont.style.placeItems = "center";
+    cont.style.color = "#8a8aa0";
+    cont.style.textAlign = "center";
+    cont.style.padding = "10px";
+  } catch (e) {}
+}
